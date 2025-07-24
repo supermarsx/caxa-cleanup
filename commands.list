@@ -1,0 +1,4 @@
+Show caxa cache 1 path;;echo;;%temp%\caxa;;enabled
+Delete caxa cache 1;;del;;/f /s /q %temp%\caxa;;enabled
+Show caxa cache 2 path;;echo;;%USERPROFILE%\AppData\Local\Temp\caxa;;enabled
+Delete caxa cache 2;;rd;;/S /Q "%USERPROFILE%\AppData\Local\Temp\caxa";;enabled

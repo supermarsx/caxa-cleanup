@@ -42,7 +42,9 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Install AutoIt
-        run: choco install autoit -y
+        run: |
+          choco install autoit -y
+          choco install upx -y
 
       - name: Use Python
         uses: actions/setup-python@v4

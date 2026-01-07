@@ -20,6 +20,24 @@ if (-not (Test-Path $Aut2Exe)) {
     exit 1
 }
 
+# Ensure UPX is available for Aut2Exe
+$Aut2ExeDir = Split-Path $Aut2Exe -Parent
+$UpxTarget = Join-Path $Aut2ExeDir "upx.exe"
+
+if (-not (Test-Path $UpxTarget)) {
+    Write-Host "UPX not found in Aut2Exe directory. Searching in PATH..."
+    $UpxInPath = Get-Command "upx.exe" -ErrorAction SilentlyContinue
+    
+    if ($UpxInPath) {
+        Write-Host "Found UPX at $($UpxInPath.Source). Copying to $UpxTarget..."
+        Copy-Item $UpxInPath.Source $UpxTarget -Force
+    } else {
+        Write-Warning "UPX not found in PATH. UPX compression will likely fail or be skipped."
+    }
+} else {
+     Write-Host "UPX found at $UpxTarget"
+}
+
 # Clean/Create Dist
 if (Test-Path $DistDir) {
     Remove-Item $DistDir -Recurse -Force

@@ -7,9 +7,31 @@ on:
     branches: [main]
 
 jobs:
-  build:
+  lint:
     runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Lint
+        run: ./scripts/Lint.ps1
 
+  format:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Format
+        run: ./scripts/Format.ps1
+
+  test:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Test
+        run: ./scripts/Test.ps1
+
+  build:
+    needs: [lint, format, test]
+    runs-on: windows-latest
+    
     steps:
       - uses: actions/checkout@v3
 
@@ -21,21 +43,50 @@ jobs:
       - name: Generate Icon
         run: python scripts/generate_icon.py
 
-      - name: Lint
-        run: ./scripts/Lint.ps1
-
-      - name: Format
-        run: ./scripts/Format.ps1
-
-      - name: Test
-        run: ./scripts/Test.ps1
-
       - name: Build
         run: ./scripts/Build.ps1
 
-      - name: Upload Artifact
+      - name: Upload Artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: caxa-cleanup
+          name: caxa-cleanup-all
           path: dist/
+
+  release:
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    runs-on: windows-latest
+    permissions:
+      contents: write
+    
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: caxa-cleanup-all
+          path: dist
+
+      - name: Get Version
+        id: version
+        shell: pwsh
+        run: |
+          $Year = Get-Date -Format "yy"
+          $Count = ${{ github.run_number }}
+          $Version = "$Year.$Count"
+          Write-Output "version=$Version" >> $env:GITHUB_OUTPUT
+          Write-Host "Version: $Version"
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.version.outputs.version }}
+          name: Release ${{ steps.version.outputs.version }}
+          files: |
+            dist/caxa-cleanup.exe
+            dist/caxa-cleanup-upx.exe
+            dist/caxa-cleanup.zip
+            dist/caxa-cleanup-upx.zip
+            dist/commands.list
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 

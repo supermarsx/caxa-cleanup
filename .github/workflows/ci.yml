@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Use Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+
+      - name: Generate Icon
+        run: python scripts/generate_icon.py
+
+      - name: Lint
+        run: ./scripts/Lint.ps1
+
+      - name: Format
+        run: ./scripts/Format.ps1
+
+      - name: Test
+        run: ./scripts/Test.ps1
+
+      - name: Build
+        run: ./scripts/Build.ps1
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: caxa-cleanup
+          path: dist/
+

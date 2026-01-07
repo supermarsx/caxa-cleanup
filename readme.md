@@ -1,11 +1,11 @@
 # caxa-cleanup
 
-![GitHub Downloads (all assets, latest release)](https://img.shields.io/github/downloads/Caxa-Cleanup/caxa-cleanup/latest/total?style=flat-square)
-![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/Caxa-Cleanup/caxa-cleanup/ci.yml?style=flat-square)
-![GitHub stars](https://img.shields.io/github/stars/Caxa-Cleanup/caxa-cleanup?style=flat-square)
-![GitHub forks](https://img.shields.io/github/forks/Caxa-Cleanup/caxa-cleanup?style=flat-square)
-![GitHub watchers](https://img.shields.io/github/watchers/Caxa-Cleanup/caxa-cleanup?style=flat-square)
-![GitHub License](https://img.shields.io/github/license/Caxa-Cleanup/caxa-cleanup?style=flat-square)
+![GitHub Downloads (all assets, latest release)](https://img.shields.io/github/downloads/supermarsx/caxa-cleanup/latest/total?style=flat-square)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/supermarsx/caxa-cleanup/ci.yml?style=flat-square)
+![GitHub stars](https://img.shields.io/github/stars/supermarsx/caxa-cleanup?style=flat-square)
+![GitHub forks](https://img.shields.io/github/forks/supermarsx/caxa-cleanup?style=flat-square)
+![GitHub watchers](https://img.shields.io/github/watchers/supermarsx/caxa-cleanup?style=flat-square)
+![GitHub License](https://img.shields.io/github/license/supermarsx/caxa-cleanup?style=flat-square)
 
 Caxa Binary JS Applications Cache Script.
 
@@ -19,7 +19,7 @@ When caxa generated binary gets stuck and app exits use this script to cleanup c
 
 ## Downloads
 
-Check the [Releases](https://github.com/Caxa-Cleanup/caxa-cleanup/releases) page. Each release includes:
+Check the [Releases](https://github.com/supermarsx/caxa-cleanup/releases) page. Each release includes:
 - `caxa-cleanup.zip`: Standard executable + `commands.list`.
 - `caxa-cleanup-upx.zip`: UPX compressed executable + `commands.list`.
 - `caxa-cleanup.exe`: Standalone binary.

@@ -26,7 +26,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Test
-        run: ./scripts/Test.ps1
+        run: ./scripts/test.ps1
 
   build:
     needs: [lint, format, test]
@@ -47,7 +47,6 @@ jobs:
 
       - name: Generate Icon
         run: python scripts/generate_icon.py
-
 
       - name: Build
         run: ./scripts/Build.ps1

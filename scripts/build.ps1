@@ -5,9 +5,11 @@ $SrcDir = Join-Path $PSScriptRoot "..\src"
 $DistDir = Join-Path $PSScriptRoot "..\dist"
 $SourceFile = Join-Path $SrcDir "caxa-cleanup.au3"
 $CommandsFile = Join-Path $SrcDir "commands.list"
+$IconFile = Join-Path $PSScriptRoot "..\assets\icon.ico"
 
 # Outputs
 $ExeStandard = Join-Path $DistDir "caxa-cleanup.exe"
+
 $ExeUpx = Join-Path $DistDir "caxa-cleanup-upx.exe"
 $ZipStandard = Join-Path $DistDir "caxa-cleanup.zip"
 $ZipUpx = Join-Path $DistDir "caxa-cleanup-upx.zip"
@@ -37,6 +39,7 @@ function Build-Exe {
     $Process = Start-Process -FilePath $Aut2Exe -ArgumentList @(
         "/in", """$SourceFile"""
         "/out", """$OutFile"""
+        "/icon", """$IconFile"""
         "/x64"
         "/gui"
         $PackArg

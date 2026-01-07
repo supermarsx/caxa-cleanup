@@ -16,7 +16,8 @@ $Process = Start-Process -FilePath $Tidy -ArgumentList """$SourceFile""" -Wait -
 
 if ($Process.ExitCode -eq 0) {
     Write-Host "Formatting passed."
-} else {
+}
+else {
     Write-Error "Formatting failed with exit code $($Process.ExitCode)"
     exit $Process.ExitCode
 }

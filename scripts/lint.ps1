@@ -16,7 +16,8 @@ $Process = Start-Process -FilePath $Au3Check -ArgumentList """$SourceFile""" -Wa
 
 if ($Process.ExitCode -eq 0) {
     Write-Host "Lint passed."
-} else {
+}
+else {
     Write-Error "Lint failed with exit code $($Process.ExitCode)"
     exit $Process.ExitCode
 }

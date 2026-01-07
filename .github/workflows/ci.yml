@@ -31,7 +31,7 @@ jobs:
   build:
     needs: [lint, format, test]
     runs-on: windows-latest
-    
+
     steps:
       - uses: actions/checkout@v3
 
@@ -40,8 +40,14 @@ jobs:
         with:
           python-version: "3.x"
 
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
       - name: Generate Icon
         run: python scripts/generate_icon.py
+
 
       - name: Build
         run: ./scripts/Build.ps1
@@ -58,7 +64,7 @@ jobs:
     runs-on: windows-latest
     permissions:
       contents: write
-    
+
     steps:
       - uses: actions/download-artifact@v3
         with:
@@ -87,6 +93,4 @@ jobs:
             dist/caxa-cleanup-upx.zip
             dist/commands.list
         env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -59,3 +59,8 @@ This repository uses GitHub Actions for Continuous Integration and deployment.
 1. Compile `src/caxa-cleanup.au3`.
 2. Place `commands.list` in the same directory as the executable.
 3. Run as Administrator.
+
+## License
+
+This project is licensed under the MIT License - see the [license.md](license.md) file for details.
+
